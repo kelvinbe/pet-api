@@ -22,5 +22,9 @@ export class PetService {
             return pet;
         }
 
+        async read(id: string){
+            return await this.petRepository.findOne({where: { id }});
+        }
+
 
 }

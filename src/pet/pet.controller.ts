@@ -21,5 +21,10 @@ export class PetController {
         return this.petService.read(id);
     }
 
+    @Put(':id')
+    updatePet(@Param('id') id: string, @Body() data: Partial<PetDTO>){
+        return this.petService.update(id, data);
+    }
+
     
 }

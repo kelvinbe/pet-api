@@ -31,6 +31,11 @@ export class PetService {
             return await this.petRepository.findOne({ id });
         }
 
+        async destroy(id: string){
+            await this.petRepository.delete({id});
+            return { deleted: true };
+        }
+
 
 
 }

@@ -16,5 +16,10 @@ export class PetController {
         return this.petService.create(data);
     }
 
+    @Get(':id')
+    readPet(@Param('id') id: string){
+        return this.petService.read(id);
+    }
+
     
 }

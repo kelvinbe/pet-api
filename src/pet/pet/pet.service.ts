@@ -16,5 +16,11 @@ export class PetService {
             return await this.petRepository.find();
         }
 
+        async create(data: PetDTO){
+            const pet = await this.petRepository.create(data);
+            await this.petRepository.save(pet);
+            return pet;
+        }
+
 
 }

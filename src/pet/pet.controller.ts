@@ -11,5 +11,10 @@ export class PetController {
         return this.petService.showAll();
     }
 
+    @Post()
+    createPet(@Body()data: PetDTO){
+        return this.petService.create(data);
+    }
+
     
 }

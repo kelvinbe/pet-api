@@ -26,5 +26,10 @@ export class PetController {
         return this.petService.update(id, data);
     }
 
+    @Delete(':id')
+    destroyPet(@Param('id') id: string){
+        return this.petService.destroy(id);
+    }
+
     
 }

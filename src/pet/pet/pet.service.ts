@@ -26,5 +26,11 @@ export class PetService {
             return await this.petRepository.findOne({where: { id }});
         }
 
+        async update(id: string, data: Partial<PetDTO>){
+            await this.petRepository.update({ id }, data);
+            return await this.petRepository.findOne({ id });
+        }
+
+
 
 }

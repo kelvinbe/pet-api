@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UsePipes, Logger } from '@nestjs/common';
 import { PetService } from './pet/pet.service';
 import { PetDTO } from './pet.dto';
 import { identity } from 'rxjs';
+import { ValidationPipe } from 'src/shared/validation.pipe';
 
 @Controller('pet')
 export class PetController {
+    private logger = new Logger('PetController');
     constructor(private petService: PetService){}
     @Get()
     showAllPets(){
@@ -12,7 +14,9 @@ export class PetController {
     }
 
     @Post()
+    @UsePipes(new ValidationPipe)
     createPet(@Body()data: PetDTO){
+        this.logger.log(JSON.stringify(data));
         return this.petService.create(data);
     }
 
@@ -22,7 +26,9 @@ export class PetController {
     }
 
     @Put(':id')
+    @UsePipes(new ValidationPipe)
     updatePet(@Param('id') id: string, @Body() data: Partial<PetDTO>){
+        this.logger.log(JSON.stringify(data));
         return this.petService.update(id, data);
     }
 

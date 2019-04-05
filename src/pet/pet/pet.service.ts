@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { PetEntity } from '../pet.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -27,8 +27,13 @@ export class PetService {
         }
 
         async update(id: string, data: Partial<PetDTO>){
+            let pet = await this.petRepository.findOne({ where: { id }});
+            if (!pet){
+                throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+            }
             await this.petRepository.update({ id }, data);
-            return await this.petRepository.findOne({ id });
+            pet = await this.petRepository.findOne({ where: { id } });
+            return pet;
         }
 
         async destroy(id: string){

@@ -5,10 +5,11 @@ import { AppService } from './app.service';
 import { PetModule } from './pet/pet.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpErrorFilter } from './shared/http-error.filter';
+import { UserModule } from './user/user.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), PetModule],
+  imports: [TypeOrmModule.forRoot(), PetModule, UserModule],
   controllers: [AppController],
   providers: [
     AppService,

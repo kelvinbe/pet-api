@@ -4,7 +4,7 @@ import { PetDTO } from './pet.dto';
 import { identity } from 'rxjs';
 import { ValidationPipe } from 'src/shared/validation.pipe';
 
-@Controller('pet')
+@Controller('api/pet')
 export class PetController {
     private logger = new Logger('PetController');
     constructor(private petService: PetService){}
